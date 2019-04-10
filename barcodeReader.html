@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Menu</title>
+
+</head>
+<body>
+	<section id="barcode">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<h1 align="center">Teste Glores<br>Lendo barcode-128<br><br></h1>
+					<h2><div id="resultado">Resultado Será Exibido aqui!!!</div></h>
+					<div class="div-externa">
+						<div id="camera" class="camera wow fadeIn" data-wow-delay="1s" data-wow-duration="4s">
+							<script src="quagga.min.js"></script>
+							<script>
+									Quagga.init({
+											inputStream: {
+													name: "Live",
+													type: "LiveStream",
+													target: document.querySelector('#camera')    // Or '#yourElement' (optional)
+											},
+											decoder: {
+													readers: ["code_128_reader"]
+											}
+									}, function (err) {
+											if (err) {
+													console.log(err);
+													return
+											}
+											console.log("Initialization finished. Ready to start");
+											Quagga.start();
+									});
+
+									Quagga.onDetected(function (data){
+											console.log(data);
+
+											
+													document.querySelector('#resultado').innerHTML = data.codeResult.code;    
+																	
+
+									})
+							</script>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>
